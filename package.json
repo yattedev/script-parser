@@ -1,0 +1,20 @@
+{
+  "name": "script-parser",
+  "version": "0.1.0",
+  "description": "Game script parser for Yatte",
+  "directories": [
+    "src",
+    "test"
+  ],
+  "repository": "https://github.com/yattedev/script-parser.git",
+  "author": "Eddie <tamamu.1r1s@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "lint": "./node_modules/.bin/prettier src/*.js --write"
+  },
+  "devDependencies": {
+    "jest": "^23.4.1",
+    "prettier": "^1.13.7"
+  }
+}
