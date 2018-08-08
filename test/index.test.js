@@ -40,3 +40,13 @@ test('Parse a command line with indent', () => {
   expect(self.parse('   @cm'))
     .toBe([{type: 'command', name: 'cm', args: {}}])
 })
+
+test('Parse a command range', () => {
+  expect(self.parse('<font color="blue">Hello,</font> world!'))
+    .toBe([
+      {type: 'command', name: 'font_start', args: {'color': 'blue'}},
+      {type: 'text', content: 'Hello,'},
+      {type: 'command', name: 'font_end', args: {}},
+      {type: 'text', content: ' world!'}
+    ])
+})
