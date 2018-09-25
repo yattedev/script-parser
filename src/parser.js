@@ -167,14 +167,21 @@ function parseValue(line, initial) {
   }
 }
 
+function flatten(list) {
+  return list.reduce(
+    (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
+  );
+}
+
 function parse(str) {
   let lines = str.split('\n');
-  return lines.map(parseHead);
+  return flatten(lines.map(parseHead));
 }
 
 module.exports = {
   parse,
   parseHead,
   parseWord,
-  skipWhitespaces
+  skipWhitespaces,
+  flatten
 };
