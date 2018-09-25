@@ -5,6 +5,12 @@ test('Skip whitespaces', () => {
     .toBe(1)
 })
 
+test('Flatten array', () => {
+  const arr = [[1,2],[3],[],[4,5,[6]]]
+  expect(self.flatten(arr))
+    .toEqual([1,2,3,4,5,6])
+})
+
 test('Parse a word', () => {
   expect(self.parseWord("time=200", 0))
     .toEqual(["time", 4])
