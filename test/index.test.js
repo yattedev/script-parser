@@ -66,3 +66,12 @@ test('Parse a command range', () => {
       {type: 'text', content: ' world!'}
     ])
 })
+
+test('Parse a complex line', () => {
+  expect(self.parseLine('Click and new line[l][r]'))
+    .toEqual([
+      {type: 'text', content: 'Click and new line'},
+      {type: 'command', name: 'l', args: {}},
+      {type: 'command', name: 'r', args: {}}
+    ])
+})
