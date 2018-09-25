@@ -111,7 +111,7 @@ function parseTag(line, initial) {
   idx = skipWhitespaces(line, idx);
   let args;
   [args, idx] = parseArguments(line, idx, ']');
-  return [{type: 'command', name, args}, idx+1];
+  return [{type: 'command', name, args}, idx];
 }
 
 function parseRange(line, initial) {
