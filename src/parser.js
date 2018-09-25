@@ -22,13 +22,10 @@ function parseHead(line) {
   switch (line[idx]) {
     case '@':
       return [parseAt(line, idx+1)];
-      break;
     case '*':
       return [parseAsterisk(line, idx+1)];
-      break;
     default:
       return parseInner(line, idx);
-      break;
   }
 }
 
