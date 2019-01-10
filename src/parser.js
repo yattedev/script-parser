@@ -53,7 +53,7 @@ function parseAsterisk(line, initial) {
   if (isEOL(line, idx)) {
     return {type: 'label', name};
   } else {
-    throw new Error('Invalid label format');
+    throw new Error(`Invalid label format:\n${line}\n${' '.repeat(idx)}^`);
   }
 }
 
