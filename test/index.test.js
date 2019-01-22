@@ -75,3 +75,17 @@ test('Parse a complex line', () => {
       {type: 'command', name: 'r', args: {}}
     ])
 })
+
+test('Parse multiple lines', () => {
+  expect(self.parse(`
+<strong>
+Hello, world![p]
+</strong>
+`))
+  .toEqual([
+    {result: {type: 'command', name: 'strong_start', args: {}}, row: 1},
+    {result: {type: 'text', content: 'Hello, world!'}, row: 2},
+    {result: {type: 'command', name: 'p', args: {}}, row: 2},
+    {result: {type: 'command', name: 'strong_end', args: {}}, row: 3}
+  ])
+})

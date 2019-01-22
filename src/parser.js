@@ -172,7 +172,13 @@ function flatten(list) {
 
 function parse(str) {
   let lines = str.split('\n');
-  return flatten(lines.map(parseHead));
+  return flatten(lines
+    .map(parseHead)
+    .map((line, lineNumber) => {
+      return line.map(result => {
+        return {result: result, row: lineNumber}
+      })
+    }));
 }
 
 module.exports = {
