@@ -149,9 +149,25 @@ function parseValue(line, initial) {
   let expr, idx = initial;
   if (line[idx] === '"') {
     idx += 1;
-    for (; idx < line.length && line[idx] !== '"'; ++idx);
+    let prefix = ''
+    let inner = ""
+    for (; idx < line.length; ++idx) {
+      if (prefix !== '\\' && line[idx] === '"') {
+        break;
+      }
+      if (line[idx] === '\\') {
+        if (prefix === '\\') {
+          prefix = ''
+          inner += line[idx]
+        }
+      } else {
+        inner += line[idx]
+      }
+      prefix = line[idx];
+    }
     if (line[idx] === '"') {
-      return [line.substring(initial+1, idx), idx];
+      //return [line.substring(initial+1, idx), idx];
+      return [inner, idx];
     } else throw new Error("Invalid string format");
   } else {
     [expr, idx] = parseWord(line, idx);

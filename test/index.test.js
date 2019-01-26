@@ -89,3 +89,9 @@ Hello, world![p]
     {result: {type: 'command', name: 'strong_end', args: {}}, row: 3}
   ])
 })
+
+test('Parse escaped argument', () => {
+  expect(self.parseLine('[test arg="\\"value\\""]'))
+    .toEqual([{type: 'command', name: 'test', args: {'arg': '"value"'}}])
+})
+
