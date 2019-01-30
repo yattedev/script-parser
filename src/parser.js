@@ -23,7 +23,8 @@ function parseHead(line) {
     case '@':
       return [parseAt(line, idx+1)];
     case '*':
-      return [parseAsterisk(line, idx+1)];
+    case '#':
+      return [parseLineWithHead(line, idx+1, line[idx])];
     default:
       return parseInner(line, idx);
   }
@@ -35,7 +36,7 @@ function isEOL(line, idx) {
 
 function isValidChar(ch) {
   return ch !== '*' && ch !== ';' && ch !== '=' && ch !== '<' && ch !== '>' && ch !== '[' &&
-    ch !== ']' && ch !== ',' && ch !== '+' && ch !== '-' && ch !== '/' && ch !== '"' && ch !== "'" && ch !== '`';
+    ch !== ']' && ch !== ',' && ch !== '+' && ch !== '-' && ch !== '/' && ch !== '"' && ch !== "'" && ch !== '`' && ch !== '#';
 }
 
 function parseAt(line, initial) {
@@ -46,14 +47,14 @@ function parseAt(line, initial) {
   return {type: 'command', name, args};
 }
 
-function parseAsterisk(line, initial) {
+function parseLineWithHead(line, initial, head) {
   let [name, idx] = parseWord(line, initial);
   idx = skipWhitespaces(line, idx);
   idx = skipComment(line, idx);
   if (isEOL(line, idx)) {
-    return {type: 'label', name};
+    return {type: 'line', head,  name};
   } else {
-    throw new Error(`Invalid label format:\n${line}\n${' '.repeat(idx)}^`);
+    throw new Error(`Invalid line format:\n${line}\n${' '.repeat(idx)}^`);
   }
 }
 

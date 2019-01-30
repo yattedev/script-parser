@@ -32,9 +32,14 @@ test('Parse a command tag with arguments', () => {
       args: {'storage': 'bg0', 'page': 'fore', 'layer': 'base'}}])
 })
 
-test('Parse a label', () => {
+test('Parse a line with an asterisk', () => {
   expect(self.parseLine('*start'))
-    .toEqual([{type: 'label', name: 'start'}])
+    .toEqual([{type: 'line', head: '*', name: 'start'}])
+})
+
+test('Parse a line with a sharp', () => {
+  expect(self.parseLine('#シャープ'))
+    .toEqual([{type: 'line', head: '#', name: 'シャープ'}])
 })
 
 test('Parse a comment', () => {
